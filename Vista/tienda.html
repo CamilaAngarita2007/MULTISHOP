@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Datol Sport - MultiShop</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        :root { --ms-primario: #4f46e5; --ms-oscuro: #1e1b4b; --ms-suave: #f4f4fb; }
+        body { background: #fff; color: #222; font-family: system-ui, -apple-system, sans-serif; }
+        
+        /* Barra de navegación superior */
+        .ms-nav { background: #fff; border-bottom: 1px solid #eee; padding: .8rem 0; }
+        .ms-nav .container { display: flex; justify-content: space-between; align-items: center; }
+        .ms-logo { font-weight: 800; font-size: 1.2rem; color: var(--ms-oscuro); text-decoration: none; display: flex; align-items: center; gap: .5rem; }
+        .ms-logo img { width: 32px; height: 32px; object-fit: contain; }
+
+        /* Banner de la Tienda */
+        .ms-tienda-banner {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.75)), url('../Assets/img/Fondos/fondo_Datolsports.jpg') center/cover;
+            color: #fff;
+            padding: 3rem 0;
+            margin-bottom: 2rem;
+        }
+        .ms-tienda-cab { display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
+        .ms-tienda-logo { width: 90px; height: 90px; border-radius: 50%; border: 3px solid #fff; background: #fff; object-fit: cover; }
+        .ms-tienda-info h1 { font-size: 2rem; font-weight: 800; margin: 0; }
+        .ms-tienda-info p { margin: .3rem 0 0; opacity: .9; }
+
+        /* Contenido y Productos */
+        .ms-seccion-titulo { font-size: 1.4rem; font-weight: 700; margin-bottom: 1.2rem; }
+        .ms-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1.2rem; }
+        .ms-tarjeta { border: 1px solid #eee; border-radius: 14px; padding: 1rem; text-decoration: none; color: inherit; display: flex; flex-direction: column; transition: .2s; background: #fff; }
+        .ms-tarjeta:hover { box-shadow: 0 6px 18px rgba(0,0,0,.08); transform: translateY(-2px); }
+        .ms-tarjeta img { width: 100%; height: 160px; object-fit: contain; border-radius: 8px; margin-bottom: .8rem; background: var(--ms-suave); }
+        .ms-tarjeta h3 { font-size: 1rem; font-weight: 700; margin-bottom: .3rem; }
+        .ms-tarjeta .precio { font-weight: 800; color: var(--ms-primario); font-size: 1.1rem; }
+        .ms-tarjeta .btn-comprar { margin-top: auto; padding: .4rem .8rem; border-radius: 8px; font-weight: 600; font-size: .85rem; }
+
+        /* Avisos */
+        .ms-aviso { background: #fef3c7; border-left: 4px solid #f59e0b; padding: .8rem 1.2rem; border-radius: 8px; margin-bottom: 2rem; }
+    </style>
+</head>
+<body>
+
+    <!-- Navegación -->
+    <header class="ms-nav">
+        <div class="container">
+            <a href="Inicio.html" class="ms-logo">
+                <img src="../Assets/img/LOGO.png" alt="MultiShop"> MultiShop
+            </a>
+            <div class="d-flex align-items-center gap-3">
+                <a href="Inicio.html" class="btn btn-outline-secondary btn-sm"><i class="bi bi-arrow-left"></i> Volver a Inicio</a>
+                <a href="carrito.html" class="btn btn-primary btn-sm"><i class="bi bi-cart3"></i> Carrito</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Banner Panorámico de la Tienda -->
+    <section class="ms-tienda-banner">
+        <div class="container">
+            <div class="ms-tienda-cab">
+                <img src="../Assets/img/Logo_Datol.jpeg" alt="Datol Sport" class="ms-tienda-logo">
+                <div class="ms-tienda-info">
+                    <h1>Datol Sport</h1>
+                    <p><i class="bi bi-geo-alt-fill text-warning"></i> Dg 9 #12-36, Duitama &nbsp;|&nbsp; <i class="bi bi-clock text-info"></i> Lun-Sáb 8:00am - 7:00pm</p>
+                    <span class="badge bg-danger mt-1">Categoría: Deportes y Ropa</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contenido Principal -->
+    <main class="container mb-5">
+        <!-- Aviso de la tienda -->
+        <div class="ms-aviso">
+            <strong><i class="bi bi-megaphone-fill text-warning"></i> Promoción de la semana:</strong> 
+            15% de descuento en chaquetas impermeables y camisetas de compresión por compras superiores a $100.000.
+        </div>
+
+        <h2 class="ms-seccion-titulo"><i class="bi bi-boxes text-primary"></i> Catálogo de Productos</h2>
+        <div class="ms-grid">
+            <!-- Producto 1 -->
+            <div class="ms-tarjeta">
+                <img src="../Assets/img/Productos_Datol/henley.jpeg" alt="Camiseta Henley">
+                <h3>Camiseta Henley</h3>
+                <p class="small text-muted mb-2">Manga larga para hombre en algodón peinado.</p>
+                <div class="d-flex justify-content-between align-items-center mt-auto pt-2 border-top">
+                    <span class="precio">$ 120.000</span>
+                    <button class="btn btn-primary btn-sm btn-comprar"><i class="bi bi-cart-plus"></i> Agregar</button>
+                </div>
+            </div>
+
+            <!-- Producto 2 -->
+            <div class="ms-tarjeta">
+                <img src="../Assets/img/Productos_Datol/real.jpeg" alt="Chaqueta Deportiva">
+                <h3>Chaqueta Deportiva</h3>
+                <p class="small text-muted mb-2">Chaqueta impermeable del Real Madrid, unisex.</p>
+                <div class="d-flex justify-content-between align-items-center mt-auto pt-2 border-top">
+                    <span class="precio">$ 129.900</span>
+                    <button class="btn btn-primary btn-sm btn-comprar"><i class="bi bi-cart-plus"></i> Agregar</button>
+                </div>
+            </div>
+
+            <!-- Producto 3 -->
+            <div class="ms-tarjeta">
+                <img src="../Assets/img/Productos_Datol/compresion.jpeg" alt="Camiseta Compresión">
+                <h3>Camiseta Compresión</h3>
+                <p class="small text-muted mb-2">Alto rendimiento para entrenamiento diario.</p>
+                <div class="d-flex justify-content-between align-items-center mt-auto pt-2 border-top">
+                    <span class="precio">$ 135.000</span>
+                    <button class="btn btn-primary btn-sm btn-comprar"><i class="bi bi-cart-plus"></i> Agregar</button>
+                </div>
+            </div>
+
+            <!-- Producto 4 -->
+            <div class="ms-tarjeta">
+                <img src="../Assets/img/Productos/Balon_futbol.jpeg" alt="Balón de Fútbol">
+                <h3>Balón de Fútbol #5</h3>
+                <p class="small text-muted mb-2">Balón profesional para grama natural y sintética.</p>
+                <div class="d-flex justify-content-between align-items-center mt-auto pt-2 border-top">
+                    <span class="precio">$ 65.000</span>
+                    <button class="btn btn-primary btn-sm btn-comprar"><i class="bi bi-cart-plus"></i> Agregar</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

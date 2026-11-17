@@ -1,132 +1,117 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Datol Sport - MultiShop</title>
+    <meta name="color-scheme" content="light dark">
+    <title>Tienda - MULTISHOP</title>
+    <link rel="icon" type="image/png" href="../Assets/img/LOGO.png">
+    <link rel="preload" href="../Assets/fonts/bricolage-grotesque-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="../Assets/fonts/figtree-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
-    <style>
-        :root { --ms-primario: #4f46e5; --ms-oscuro: #1e1b4b; --ms-suave: #f4f4fb; }
-        body { background: #fff; color: #222; font-family: system-ui, -apple-system, sans-serif; }
-        
-        /* Barra de navegación superior */
-        .ms-nav { background: #fff; border-bottom: 1px solid #eee; padding: .8rem 0; }
-        .ms-nav .container { display: flex; justify-content: space-between; align-items: center; }
-        .ms-logo { font-weight: 800; font-size: 1.2rem; color: var(--ms-oscuro); text-decoration: none; display: flex; align-items: center; gap: .5rem; }
-        .ms-logo img { width: 32px; height: 32px; object-fit: contain; }
-
-        /* Banner de la Tienda */
-        .ms-tienda-banner {
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.75)), url('../Assets/img/Fondos/fondo_Datolsports.jpg') center/cover;
-            color: #fff;
-            padding: 3rem 0;
-            margin-bottom: 2rem;
-        }
-        .ms-tienda-cab { display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
-        .ms-tienda-logo { width: 90px; height: 90px; border-radius: 50%; border: 3px solid #fff; background: #fff; object-fit: cover; }
-        .ms-tienda-info h1 { font-size: 2rem; font-weight: 800; margin: 0; }
-        .ms-tienda-info p { margin: .3rem 0 0; opacity: .9; }
-
-        /* Contenido y Productos */
-        .ms-seccion-titulo { font-size: 1.4rem; font-weight: 700; margin-bottom: 1.2rem; }
-        .ms-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1.2rem; }
-        .ms-tarjeta { border: 1px solid #eee; border-radius: 14px; padding: 1rem; text-decoration: none; color: inherit; display: flex; flex-direction: column; transition: .2s; background: #fff; }
-        .ms-tarjeta:hover { box-shadow: 0 6px 18px rgba(0,0,0,.08); transform: translateY(-2px); }
-        .ms-tarjeta img { width: 100%; height: 160px; object-fit: contain; border-radius: 8px; margin-bottom: .8rem; background: var(--ms-suave); }
-        .ms-tarjeta h3 { font-size: 1rem; font-weight: 700; margin-bottom: .3rem; }
-        .ms-tarjeta .precio { font-weight: 800; color: var(--ms-primario); font-size: 1.1rem; }
-        .ms-tarjeta .btn-comprar { margin-top: auto; padding: .4rem .8rem; border-radius: 8px; font-weight: 600; font-size: .85rem; }
-
-        /* Avisos */
-        .ms-aviso { background: #fef3c7; border-left: 4px solid #f59e0b; padding: .8rem 1.2rem; border-radius: 8px; margin-bottom: 2rem; }
-    </style>
+    <link rel="stylesheet" href="../Assets/css/tokens.css">
+    <link rel="stylesheet" href="../Assets/css/base.css">
+    <link rel="stylesheet" href="../Assets/css/components.css">
+    <link rel="stylesheet" href="../Assets/css/layout.css">
+    <link rel="stylesheet" href="../Assets/css/pages.css">
+    <link rel="stylesheet" href="../Assets/css/pages-catalogo.css">
+    <link rel="stylesheet" href="../Assets/css/pages-cuenta.css">
+    <link rel="stylesheet" href="../Assets/css/pages-paneles.css">
+    <link rel="stylesheet" href="../Assets/css/multishop.css">
+    <script>
+        // Tema guardado antes de dibujar (sin parpadeo).
+        try { var t = localStorage.getItem('ms-tema'); if (t === 'dark') { document.documentElement.setAttribute('data-theme', 'dark'); document.documentElement.setAttribute('data-bs-theme', 'dark'); } } catch (e) { }
+    </script>
 </head>
 <body>
+<header id="barraNav"></header>
 
-    <!-- Navegación -->
-    <header class="ms-nav">
-        <div class="container">
-            <a href="Inicio.html" class="ms-logo">
-                <img src="../Assets/img/LOGO.png" alt="MultiShop"> MultiShop
-            </a>
-            <div class="d-flex align-items-center gap-3">
-                <a href="Inicio.html" class="btn btn-outline-secondary btn-sm"><i class="bi bi-arrow-left"></i> Volver a Inicio</a>
-                <a href="carrito.html" class="btn btn-primary btn-sm"><i class="bi bi-cart3"></i> Carrito</a>
+<main id="contenido" class="ms-main" tabindex="-1">
+    <section class="tb sin-imagen" id="bannerTienda">
+        <i class="tb-deco bi bi-shop" id="decoTienda" aria-hidden="true"></i>
+        <div class="container tb-in">
+            <img class="tb-logo" id="logoTienda" src="../Assets/img/LOGO.png" alt="">
+            <div class="tb-texto">
+                <h1 id="nombreTienda">&nbsp;</h1>
+                <span class="tb-cat" id="categoriaTienda"></span>
+                <ul class="tb-meta" id="metaTienda"></ul>
             </div>
-        </div>
-    </header>
-
-    <!-- Banner Panorámico de la Tienda -->
-    <section class="ms-tienda-banner">
-        <div class="container">
-            <div class="ms-tienda-cab">
-                <img src="../Assets/img/Logo_Datol.jpeg" alt="Datol Sport" class="ms-tienda-logo">
-                <div class="ms-tienda-info">
-                    <h1>Datol Sport</h1>
-                    <p><i class="bi bi-geo-alt-fill text-warning"></i> Dg 9 #12-36, Duitama &nbsp;|&nbsp; <i class="bi bi-clock text-info"></i> Lun-Sáb 8:00am - 7:00pm</p>
-                    <span class="badge bg-danger mt-1">Categoría: Deportes y Ropa</span>
-                </div>
-            </div>
+            <div class="tb-acciones" id="accionesTienda"></div>
         </div>
     </section>
 
-    <!-- Contenido Principal -->
-    <main class="container mb-5">
-        <!-- Aviso de la tienda -->
-        <div class="ms-aviso">
-            <strong><i class="bi bi-megaphone-fill text-warning"></i> Promoción de la semana:</strong> 
-            15% de descuento en chaquetas impermeables y camisetas de compresión por compras superiores a $100.000.
+    <div class="container">
+        <div class="tb-info" id="infoTienda" hidden></div>
+        <section class="ms-seccion" aria-labelledby="tituloProductos">
+            <div class="ms-seccion-cab"><h2 id="tituloProductos">Productos</h2><span class="text-muted" id="conteo"></span></div>
+        <form class="fp" id="formFiltros" role="search" aria-label="Buscar y filtrar productos">
+            <div class="fp-fila">
+                <div class="fp-campo crece">
+                    <label for="fq">Buscar</label>
+                    <div class="fp-buscar"><i class="bi bi-search" aria-hidden="true"></i>
+                        <input type="search" name="q" id="fq" class="form-control" placeholder="Nombre o descripción" maxlength="60"></div>
+                </div>
+                
+                <div class="fp-campo precio"><label for="fmin">Precio desde</label>
+                    <input type="number" name="min" id="fmin" class="form-control" min="0" step="1000" inputmode="numeric" placeholder="$ 0"></div>
+                <div class="fp-campo precio"><label for="fmax">Precio hasta</label>
+                    <input type="number" name="max" id="fmax" class="form-control" min="0" step="1000" inputmode="numeric" placeholder="Sin tope"></div>
+                <button type="submit" class="btn btn-ms-primary"><i class="bi bi-funnel"></i>Aplicar</button>
+            </div>
+            <div class="fp-fila">
+                <div class="fp-opciones">
+                    <label class="ms-opcion"><input type="checkbox" name="oferta" value="1"><span><i class="bi bi-tag"></i>Solo ofertas</span></label>
+                    <label class="ms-opcion"><input type="checkbox" name="disponibles" value="1"><span><i class="bi bi-check2-circle"></i>Solo disponibles</span></label>
+                </div>
+                <div class="fp-fin">
+                    <button type="button" class="btn btn-link fp-quitar" hidden><i class="bi bi-x-circle"></i>Quitar filtros</button>
+                    <div class="fp-campo"><label for="forden">Ordenar por</label>
+                        <select name="orden" id="forden" class="form-select">
+                            <option value="novedad">Más recientes</option>
+                            <option value="precio_asc">Precio: menor a mayor</option>
+                            <option value="precio_desc">Precio: mayor a menor</option>
+                            <option value="calificacion">Mejor calificados</option>
+                            <option value="nombre">Nombre (A-Z)</option>
+                        </select></div>
+                </div>
+            </div>
+        </form>
+            <div id="productos"></div>
+            <div id="paginador"></div>
+        </section>
+    </div>
+
+    <div class="modal fade" id="modalCalificar" tabindex="-1" aria-labelledby="tituloCalificar" aria-hidden="true">
+        <div class="modal-dialog">
+            <form class="modal-content" id="formCalificar">
+                <div class="modal-header"><h2 class="modal-title" id="tituloCalificar">Califica esta tienda</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button></div>
+                <div class="modal-body">
+                    <fieldset class="ms-puntaje"><legend class="visually-hidden">Puntuación</legend>
+                        <input type="radio" id="estrellaTienda5" name="puntuacion" value="5" required><label for="estrellaTienda5" title="5 de 5"><i class="bi bi-star-fill"></i><span class="visually-hidden">5 de 5</span></label>
+                        <input type="radio" id="estrellaTienda4" name="puntuacion" value="4"><label for="estrellaTienda4" title="4 de 5"><i class="bi bi-star-fill"></i><span class="visually-hidden">4 de 5</span></label>
+                        <input type="radio" id="estrellaTienda3" name="puntuacion" value="3"><label for="estrellaTienda3" title="3 de 5"><i class="bi bi-star-fill"></i><span class="visually-hidden">3 de 5</span></label>
+                        <input type="radio" id="estrellaTienda2" name="puntuacion" value="2"><label for="estrellaTienda2" title="2 de 5"><i class="bi bi-star-fill"></i><span class="visually-hidden">2 de 5</span></label>
+                        <input type="radio" id="estrellaTienda1" name="puntuacion" value="1"><label for="estrellaTienda1" title="1 de 5"><i class="bi bi-star-fill"></i><span class="visually-hidden">1 de 5</span></label>
+                    </fieldset>
+                    <label class="form-label mt-3" for="comentarioTienda">Comentario (opcional)</label>
+                    <textarea class="form-control" id="comentarioTienda" name="comentario" rows="3" maxlength="500" placeholder="¿Cómo te atendieron? ¿Llegó a tiempo?"></textarea>
+                    <p id="mensajeCalificar" class="ms-mensaje" role="status" aria-live="polite"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-danger me-auto" id="eliminarCalificacion" hidden>Eliminar</button>
+                    <button type="submit" class="btn btn-ms-primary">Guardar calificación</button>
+                </div>
+            </form>
         </div>
+    </div>
+</main>
 
-        <h2 class="ms-seccion-titulo"><i class="bi bi-boxes text-primary"></i> Catálogo de Productos</h2>
-        <div class="ms-grid">
-            <!-- Producto 1 -->
-            <div class="ms-tarjeta">
-                <img src="../Assets/img/Productos_Datol/henley.jpeg" alt="Camiseta Henley">
-                <h3>Camiseta Henley</h3>
-                <p class="small text-muted mb-2">Manga larga para hombre en algodón peinado.</p>
-                <div class="d-flex justify-content-between align-items-center mt-auto pt-2 border-top">
-                    <span class="precio">$ 120.000</span>
-                    <button class="btn btn-primary btn-sm btn-comprar"><i class="bi bi-cart-plus"></i> Agregar</button>
-                </div>
-            </div>
-
-            <!-- Producto 2 -->
-            <div class="ms-tarjeta">
-                <img src="../Assets/img/Productos_Datol/real.jpeg" alt="Chaqueta Deportiva">
-                <h3>Chaqueta Deportiva</h3>
-                <p class="small text-muted mb-2">Chaqueta impermeable del Real Madrid, unisex.</p>
-                <div class="d-flex justify-content-between align-items-center mt-auto pt-2 border-top">
-                    <span class="precio">$ 129.900</span>
-                    <button class="btn btn-primary btn-sm btn-comprar"><i class="bi bi-cart-plus"></i> Agregar</button>
-                </div>
-            </div>
-
-            <!-- Producto 3 -->
-            <div class="ms-tarjeta">
-                <img src="../Assets/img/Productos_Datol/compresion.jpeg" alt="Camiseta Compresión">
-                <h3>Camiseta Compresión</h3>
-                <p class="small text-muted mb-2">Alto rendimiento para entrenamiento diario.</p>
-                <div class="d-flex justify-content-between align-items-center mt-auto pt-2 border-top">
-                    <span class="precio">$ 135.000</span>
-                    <button class="btn btn-primary btn-sm btn-comprar"><i class="bi bi-cart-plus"></i> Agregar</button>
-                </div>
-            </div>
-
-            <!-- Producto 4 -->
-            <div class="ms-tarjeta">
-                <img src="../Assets/img/Productos/Balon_futbol.jpeg" alt="Balón de Fútbol">
-                <h3>Balón de Fútbol #5</h3>
-                <p class="small text-muted mb-2">Balón profesional para grama natural y sintética.</p>
-                <div class="d-flex justify-content-between align-items-center mt-auto pt-2 border-top">
-                    <span class="precio">$ 65.000</span>
-                    <button class="btn btn-primary btn-sm btn-comprar"><i class="bi bi-cart-plus"></i> Agregar</button>
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<footer id="piePagina"></footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../Controlador/comun.js"></script>
+<script src="../Controlador/filtros.js"></script>
+<script src="../Controlador/tienda.js"></script>
 </body>
 </html>

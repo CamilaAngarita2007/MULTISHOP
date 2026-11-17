@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark">
+    <title>Finalizar compra - MULTISHOP</title>
+    <link rel="icon" type="image/png" href="../Assets/img/LOGO.png">
+    <link rel="preload" href="../Assets/fonts/bricolage-grotesque-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="../Assets/fonts/figtree-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="../Assets/css/tokens.css">
+    <link rel="stylesheet" href="../Assets/css/base.css">
+    <link rel="stylesheet" href="../Assets/css/components.css">
+    <link rel="stylesheet" href="../Assets/css/layout.css">
+    <link rel="stylesheet" href="../Assets/css/pages.css">
+    <link rel="stylesheet" href="../Assets/css/pages-catalogo.css">
+    <link rel="stylesheet" href="../Assets/css/pages-cuenta.css">
+    <link rel="stylesheet" href="../Assets/css/pages-paneles.css">
+    <link rel="stylesheet" href="../Assets/css/multishop.css">
+    <script>
+        // Tema guardado antes de dibujar (sin parpadeo).
+        try { var t = localStorage.getItem('ms-tema'); if (t === 'dark') { document.documentElement.setAttribute('data-theme', 'dark'); document.documentElement.setAttribute('data-bs-theme', 'dark'); } } catch (e) { }
+    </script>
+</head>
+<body>
+<header id="barraNav"></header>
+
+<main id="contenido" class="ms-main" tabindex="-1">
+    <div class="container">
+        <div class="ms-page-head">
+            <div><h1>Finalizar compra</h1><p id="subtituloPago"></p></div>
+            <div class="acciones"><a href="carrito.html" class="btn btn-outline-secondary"><i class="bi bi-arrow-left"></i> Volver al carrito</a></div>
+        </div>
+        <form id="formPago" enctype="multipart/form-data">
+            <div class="ms-pagina">
+                <div class="ms-pagina-principal">
+                    <section class="ms-card ms-bloque" aria-labelledby="tituloEntrega">
+                        <h2 id="tituloEntrega">¿Cómo quieres recibir tu pedido?</h2>
+                        <p class="sub">La forma de entrega aplica para todas las tiendas.</p>
+                        <div class="ms-elecciones" role="radiogroup" aria-labelledby="tituloEntrega">
+                            <label class="ms-eleccion"><input type="radio" name="tipoEntrega" value="RetiroTienda">
+                                <span class="cuerpo"><span class="icono"><i class="bi bi-shop"></i></span><span class="texto"><b>Retirar en la tienda</b><small>Sin costo de envío</small></span><span class="marca"></span></span></label>
+                            <label class="ms-eleccion"><input type="radio" name="tipoEntrega" value="DomicilioPropio" checked>
+                                <span class="cuerpo"><span class="icono"><i class="bi bi-house-door"></i></span><span class="texto"><b>Domicilio a mi dirección</b><small>La que tienes registrada en tu cuenta</small></span><span class="marca"></span></span></label>
+                            <label class="ms-eleccion"><input type="radio" name="tipoEntrega" value="DomicilioOtro">
+                                <span class="cuerpo"><span class="icono"><i class="bi bi-gift"></i></span><span class="texto"><b>Domicilio a otra dirección</b><small>Por ejemplo, un regalo</small></span><span class="marca"></span></span></label>
+                        </div>
+                        <div class="ms-subbloque">
+                            <div id="bloqueRetiro" class="ms-direccion" hidden><i class="bi bi-info-circle" aria-hidden="true"></i>
+                                <p>Podrás recoger tus productos directamente en cada tienda, en la dirección y el horario indicados en su página.</p></div>
+                            <div id="direccionPropia"></div>
+                            <div id="bloqueOtro" hidden>
+                                <div class="mb-3"><label class="form-label" for="destinatario">Nombre de quien recibe</label>
+                                    <input type="text" id="destinatario" name="destinatario" class="form-control" maxlength="150" placeholder="Nombre completo" autocomplete="off"></div>
+                                <div class="mb-3"><label class="form-label" for="telefono">Teléfono de contacto</label>
+                                    <input type="tel" id="telefono" name="telefono" class="form-control" maxlength="20" placeholder="Número de contacto" autocomplete="off"></div>
+                                <div><label class="form-label" for="direccionOtra">Dirección de entrega</label>
+                                    <input type="text" id="direccionOtra" name="direccionOtra" class="form-control" maxlength="250" placeholder="Dirección completa, barrio, ciudad" autocomplete="off"></div>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="ms-card ms-bloque" aria-labelledby="tituloPago">
+                        <h2 id="tituloPago">Método de pago</h2>
+                        <p class="sub">Solo ves los métodos que aceptan todas las tiendas de tu carrito.</p>
+                        <div class="ms-elecciones" role="radiogroup" aria-labelledby="tituloPago" id="metodosPago"></div>
+                        <div class="alert alert-info mt-3 mb-0" id="avisoContraentrega"><span>Con <strong>Contraentrega</strong>, el pedido queda como <strong>Pendiente</strong> hasta que confirmes en tu factura que lo recibiste y pagaste.</span></div>
+                    </section>
+                    <div id="tiendasPago"></div>
+                </div>
+                <aside class="ms-pagina-lado" aria-label="Resumen del pedido"><div class="ms-card ms-resumen" id="resumenPago"></div></aside>
+            </div>
+        </form>
+    </div>
+</main>
+
+<footer id="piePagina"></footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../Controlador/comun.js"></script>
+<script src="../Controlador/checkout.js"></script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+/* =====================================================================
+   MULTISHOP (versión PHP) · Capa de adaptación
+   El diseño es el del proyecto en C#: tokens.css, base.css, components.css, layout.css y pages*.css
+   se copiaron tal cual (solo cambian las rutas de fuentes e imágenes).
+   Este archivo solo:
+     1. ajusta detalles de Bootstrap 5.3 (CDN) que el CSS original, escrito para Bootstrap 5.1, no cubría;
+     2. agrega las piezas propias de esta versión (avisos emergentes, mensajes de formulario).
+   Igual que el original: ningún color escrito a mano, todo sale de tokens.css.
+   ===================================================================== */
+
+/* ---------- Bootstrap 5.3: estados activos de los botones con los tokens de la marca ---------- */
+.btn:active, .btn.active, .btn.show, .btn:first-child:active, :not(.btn-check) + .btn:active {
+  background: var(--btn-bg-h); color: var(--btn-fg-h); border-color: var(--btn-bd-h);
+}
+.btn:focus-visible { box-shadow: none; outline: var(--focus); outline-offset: 2px; }
+.form-check-input { background-color: var(--surface); border: 1.5px solid var(--line-strong); }
+.form-check-input:checked { background-color: var(--accent); border-color: var(--accent); }
+.form-check-input:focus { box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent-vivid) 28%, transparent); border-color: var(--accent-link); }
+.form-switch .form-check-input { width: 2.4rem; border-radius: var(--r-pill); }
+.text-body-secondary { color: var(--text-3) !important; }
+.carousel-indicators [data-bs-target] { background-color: #fff; }
+[data-theme="dark"] .dropdown-menu { --bs-dropdown-bg: var(--surface); }
+.navbar-toggler-icon { display: none; }
+
+/* ---------- Avisos emergentes (reemplazan los TempData del proyecto en C#) ---------- */
+.ms-toasts { position: fixed; top: calc(var(--nav-h) + 12px); right: 16px; z-index: 1090; display: flex; flex-direction: column; gap: var(--s-2); width: min(400px, calc(100vw - 32px)); }
+.ms-toasts .alert { margin: 0; box-shadow: var(--sh-3); }
+
+/* ---------- Mensaje de resultado bajo un formulario (igual que mensajeRegistro de Club Acerias) ---------- */
+.ms-mensaje { margin: var(--s-3) 0 0; padding: .7rem 1rem; border-radius: var(--r-md); background: var(--ok-soft); color: var(--ok); font-size: .9375rem; }
+.ms-mensaje[data-tipo="error"] { background: var(--danger-soft); color: var(--danger); }
+.ms-mensaje:empty { display: none; }
+
+/* ---------- Contadores de los botones de la barra y flotantes ---------- */
+.ms-fab .ms-fab-badge:empty, .ms-icon-btn .ms-count:empty { display: none; }
+
+/* ---------- Tarjeta de producto: estrellas y espacio cuando no hay botón ---------- */
+.ms-pcard .ms-calif .ms-estrellas { font-size: .8125rem; }
+
+/* ---------- Chat: el formulario de cupón y el reporte dentro de la conversación ---------- */
+.ms-chat-cab .acciones { display: flex; gap: var(--s-2); flex: none; }

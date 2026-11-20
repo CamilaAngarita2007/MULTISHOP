@@ -59,6 +59,7 @@ formulario.addEventListener("submit", async e => {
     if (resultado.ok) {
         formulario.codigo.value = "";
         formulario.valor.value = "";
+
         cargarCupones();
     }
 });

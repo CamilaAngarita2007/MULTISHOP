@@ -1,0 +1,37 @@
+/* =====================================================================
+   MULTISHOP · Catálogo: página de tienda, búsqueda, filtros, producto y favoritos
+   Solo usa tokens; la identidad de cada tienda llega por los tokens --accent-*.
+   ===================================================================== */
+
+/* ---------- Portada de la tienda ---------- */
+.tb { position: relative; isolation: isolate; overflow: hidden; background: var(--accent-deep) center / cover no-repeat; color: #fff; }
+.tb::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(100deg, color-mix(in srgb, var(--accent-deep) 94%, transparent) 0%, color-mix(in srgb, var(--accent-deep) 80%, transparent) 55%, color-mix(in srgb, var(--accent-deep) 58%, transparent) 100%); }
+.tb.sin-imagen::before { background: var(--accent-deep); }
+.tb-deco { position: absolute; right: max(var(--gutter), 4vw); bottom: -1.2rem; z-index: -1; font-size: clamp(7rem, 16vw, 12rem); line-height: 1; color: #fff; opacity: .08; pointer-events: none; }
+.tb-in { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--s-4) var(--s-5); align-items: center; padding-block: clamp(1.75rem, 5vw, 3.25rem); }
+.tb-logo { width: clamp(84px, 14vw, 128px); aspect-ratio: 1; border-radius: 50%; object-fit: cover; background: var(--surface); border: 4px solid var(--surface); box-shadow: var(--sh-3); }
+.tb-texto { min-width: 0; }
+.tb-texto h1 { margin: 0 0 var(--s-2); color: #fff; font-size: var(--step-4); overflow-wrap: anywhere; }
+.tb-cat { display: inline-flex; align-items: center; gap: .4rem; margin-bottom: var(--s-3); padding: .28rem .8rem; border-radius: var(--r-pill); background: rgb(255 255 255 / .16); color: #fff; font: 650 .8125rem var(--font-body); }
+.tb-meta { display: flex; flex-wrap: wrap; gap: .35rem 1.4rem; margin: 0; padding: 0; list-style: none; color: rgb(255 255 255 / .9); font-size: .9375rem; }
+.tb-meta li { display: inline-flex; align-items: center; gap: .45rem; }
+.tb-meta .ms-estrellas { color: #FFD66B; }
+.tb-acciones { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: var(--s-2); }
+@media (min-width: 992px) {
+  .tb-in { grid-template-columns: auto minmax(0, 1fr) auto; }
+  .tb-acciones { grid-column: auto; flex-direction: column; align-items: stretch; min-width: 200px; }
+}
+.btn.tb-btn { --btn-bg: #fff; --btn-fg: var(--accent-deep); --btn-bd: #fff; --btn-bg-h: var(--accent-soft); --btn-fg-h: var(--accent-soft-text); --btn-bd-h: var(--accent-soft); }
+.btn.tb-btn-linea { --btn-bg: transparent; --btn-fg: #fff; --btn-bd: rgb(255 255 255 / .65); --btn-bg-h: rgb(255 255 255 / .14); --btn-fg-h: #fff; --btn-bd-h: #fff; }
+
+/* ---------- Cupón y avisos de la tienda ---------- */
+.tb-info { display: grid; gap: var(--s-3); margin-top: var(--s-5); }
+.tb-cupon { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--s-3) var(--s-5); padding: var(--s-4) var(--s-5); background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-lg); box-shadow: var(--sh-1); }
+.tb-cupon-texto { display: flex; flex-direction: column; gap: .15rem; min-width: 0; }
+.tb-cupon-texto strong { font: 700 var(--step-1) var(--font-display); letter-spacing: -0.02em; }
+.tb-cupon-texto span { color: var(--text-2); font-size: .875rem; }
+.tb-cupon .ms-cupon-tarjeta { color: var(--accent-link); background: var(--accent-wash); }
+.tb-aviso { display: flex; gap: var(--s-3); align-items: flex-start; padding: var(--s-3) var(--s-4); border-radius: var(--r-md); background: var(--accent-soft); color: var(--accent-soft-text); }
+.tb-aviso > i { font-size: 1.2rem; line-height: 1.5; flex: none; }
+.tb-aviso p { margin: 0; white-space: pre-line; overflow-wrap: anywhere; }
+.tb-aviso img { display: block; max-height: 180px; border-radius: var(--r-sm); }

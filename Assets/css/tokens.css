@@ -1,0 +1,149 @@
+/* =====================================================================
+   MULTISHOP · Tokens de diseño
+   Tres capas: primitivos (valores crudos de la marca) → semánticos (para qué sirve cada color)
+   → componentes (en components.css). Nada fuera de este archivo debería escribir un color a mano.
+
+   El mundo de marca: capas de tierra (cafés y ocres), verde salvia y hueso, como la foto del inicio y el logo.
+   El tema de CADA TIENDA reemplaza solo los tokens --accent-* (ver Services/TemaTienda.cs); el resto no cambia.
+   ===================================================================== */
+
+/* ---- Tipografías autoalojadas (variables: un archivo cubre todos los pesos) ---- */
+@font-face {
+  font-family: "Bricolage Grotesque";
+  src: url("../fonts/bricolage-grotesque-latin-wght-normal.woff2") format("woff2");
+  font-weight: 200 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Figtree";
+  src: url("../fonts/figtree-latin-wght-normal.woff2") format("woff2");
+  font-weight: 300 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Figtree";
+  src: url("../fonts/figtree-latin-wght-italic.woff2") format("woff2");
+  font-weight: 300 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+:root {
+  /* ===== Primitivos de marca ===== */
+  --cafe-50: #F7F0EC;  --cafe-100: #EBDAD2; --cafe-200: #DBBFB2; --cafe-300: #C99A88; --cafe-400: #B78471;
+  --cafe-500: #A67564; --cafe-600: #8D5F4F; --cafe-700: #723E31; --cafe-800: #552C23; --cafe-900: #3A1E18;
+
+  --salvia-50: #F3F5F2;  --salvia-100: #E5EAE4; --salvia-200: #D4DDD6; --salvia-300: #C7D3C9; --salvia-400: #AEBBB2;
+  --salvia-500: #96A29C; --salvia-600: #78857E; --salvia-700: #5B6862; --salvia-800: #414C47; --salvia-900: #27302C;
+
+  --arena-100: #EFEBE2; --arena-200: #E4DDCE; --arena-300: #CFC5B8; --arena-500: #948A79;
+  --tinta: #1F2623;
+
+  /* ===== Superficies y texto (modo claro) ===== */
+  --bg-base: #EEF0EA;          /* hueso con un velo de salvia: ni crema ni gris frío */
+  --wash-mix: 0%;              /* cuánto del tinte de la tienda se mezcla en el fondo (la tienda lo sube) */
+  --bg: color-mix(in srgb, var(--accent-wash) var(--wash-mix), var(--bg-base));
+  --bg-sunken: #E5E8E1;
+  --surface: #FFFFFF;
+  --surface-2: #F6F7F3;
+  --line: #D9DED7;
+  --line-strong: #BCC4BB;
+
+  --text: var(--tinta);
+  --text-2: #46514C;
+  --text-3: #5F6A65;
+  --text-on-dark: #F4F6F2;
+
+  /* ===== Acento: por defecto el café de MultiShop; cada tienda lo redefine ===== */
+  --accent: var(--cafe-700);
+  --accent-hover: #5C3026;
+  --accent-contrast: #FFFFFF;
+  --accent-deep: var(--cafe-900);
+  --accent-soft: var(--cafe-100);
+  --accent-soft-text: #4B261C;
+  --accent-wash: var(--cafe-50);
+  --accent-vivid: var(--cafe-500);
+  --accent-link: var(--cafe-700);
+
+  /* ===== Estados ===== */
+  --ok: #2B6A3C;      --ok-soft: #DCEBDD;
+  --warn: #7A5200;    --warn-soft: #F5E6BF;
+  --danger: #A32A22;  --danger-soft: #F6DAD6;
+  --info: #285E78;    --info-soft: #D9E8EE;
+  --star: #C98A00;
+  --sale: #B3261E;
+
+  /* ===== Tipografía ===== */
+  --font-display: "Bricolage Grotesque", "Segoe UI Variable Display", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Figtree", "Segoe UI Variable Text", "Segoe UI", system-ui, -apple-system, sans-serif;
+
+  --step--1: clamp(0.8125rem, 0.79rem + 0.1vw, 0.875rem);
+  --step-0: 1rem;
+  --step-1: clamp(1.0625rem, 1.03rem + 0.15vw, 1.1875rem);
+  --step-2: clamp(1.25rem, 1.15rem + 0.5vw, 1.5rem);
+  --step-3: clamp(1.5rem, 1.3rem + 1vw, 2.125rem);
+  --step-4: clamp(1.9rem, 1.5rem + 2vw, 3rem);
+  --step-5: clamp(2.4rem, 1.7rem + 3.5vw, 4.5rem);
+
+  /* ===== Espacio, forma, profundidad, movimiento ===== */
+  --s-1: 0.25rem; --s-2: 0.5rem; --s-3: 0.75rem; --s-4: 1rem; --s-5: 1.5rem;
+  --s-6: 2rem; --s-7: 3rem; --s-8: 4.5rem; --s-9: 6.5rem;
+
+  --r-sm: 8px; --r-md: 12px; --r-lg: 18px; --r-xl: 28px; --r-pill: 999px;
+
+  --sh-1: 0 1px 2px rgba(24, 33, 28, .07), 0 1px 1px rgba(24, 33, 28, .04);
+  --sh-2: 0 2px 4px rgba(24, 33, 28, .06), 0 12px 26px -14px rgba(24, 33, 28, .28);
+  --sh-3: 0 6px 14px rgba(24, 33, 28, .08), 0 30px 54px -22px rgba(24, 33, 28, .40);
+
+  --ease: cubic-bezier(.2, .7, .2, 1);
+  --t-fast: 140ms; --t-med: 240ms; --t-slow: 460ms;
+
+  --container: 1280px;
+  --gutter: clamp(16px, 4vw, 36px);
+  --nav-h: 68px;
+
+  --focus: 2px solid var(--accent-link);
+}
+
+/* ===== Modo oscuro: casi negros con un velo verde; el café se aclara para conservar contraste ===== */
+:root[data-theme="dark"] {
+  --bg-base: #121614;
+  --bg-sunken: #0C100E;
+  --surface: #1A201D;
+  --surface-2: #212925;
+  --line: #2D3731;
+  --line-strong: #3E4B44;
+
+  --text: #ECEFEA;
+  --text-2: #BAC3BD;
+  --text-3: #95A09A;
+  --text-on-dark: #F4F6F2;
+
+  --accent: var(--cafe-300);
+  --accent-hover: #D8AE9E;
+  --accent-contrast: #24130E;
+  --accent-deep: #2A1611;
+  --accent-soft: #3A241D;
+  --accent-soft-text: var(--cafe-100);
+  --accent-wash: #1D1714;
+  --accent-vivid: var(--cafe-400);
+  --accent-link: #DCB3A3;
+
+  --ok: #8FD0A0;      --ok-soft: #1C3324;
+  --warn: #E8C36A;    --warn-soft: #3A2E10;
+  --danger: #F29C92;  --danger-soft: #3C1D1A;
+  --info: #8CC4DE;    --info-soft: #172C37;
+  --star: #E8B23A;
+  --sale: #F2877D;
+
+  --sh-1: 0 1px 2px rgba(0, 0, 0, .35);
+  --sh-2: 0 2px 4px rgba(0, 0, 0, .3), 0 12px 26px -14px rgba(0, 0, 0, .7);
+  --sh-3: 0 6px 14px rgba(0, 0, 0, .35), 0 30px 54px -22px rgba(0, 0, 0, .85);
+}
+
+/* Preferencia del sistema cuando la persona aún no eligió tema (site.js fija data-theme al cargar). */
+@media (prefers-reduced-motion: reduce) {
+  :root { --t-fast: 1ms; --t-med: 1ms; --t-slow: 1ms; }
+}

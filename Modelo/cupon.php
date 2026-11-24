@@ -14,21 +14,21 @@ class cupon
 
     public static function normalizar($codigo)
     {
-        return mb_strtoupper(trim((string)$codigo));
+        return mb_strtoupper(trim((string) $codigo));
     }
 
     public static function calcularDescuento($cupon, $subtotal)
     {
         $descuento = $cupon['Tipo_Descuento'] === 'Porcentaje'
-            ? round($subtotal * (float)$cupon['Valor'] / 100, 0)
-            : (float)$cupon['Valor'];
+            ? round($subtotal * (float) $cupon['Valor'] / 100, 0)
+            : (float) $cupon['Valor'];
         return max(0, min($descuento, $subtotal));
     }
 
     public static function describir($cupon)
     {
         return $cupon['Tipo_Descuento'] === 'Porcentaje'
-            ? rtrim(rtrim(number_format((float)$cupon['Valor'], 2, ',', ''), '0'), ',') . "% de descuento"
+            ? rtrim(rtrim(number_format((float) $cupon['Valor'], 2, ',', ''), '0'), ',') . "% de descuento"
             : pesos($cupon['Valor']) . " de descuento";
     }
 
@@ -36,10 +36,14 @@ class cupon
     public static function estadoVisible($cupon, $usos)
     {
         $hoy = date('Y-m-d');
-        if ($cupon['Estado'] !== 'Activo') return "Inactivo";
-        if (substr($cupon['Fecha_Fin'], 0, 10) < $hoy) return "Vencido";
-        if (substr($cupon['Fecha_Inicio'], 0, 10) > $hoy) return "Programado";
-        if ($cupon['Usos_Maximos'] !== null && $usos >= (int)$cupon['Usos_Maximos']) return "Agotado";
+        if ($cupon['Estado'] !== 'Activo')
+            return "Inactivo";
+        if (substr($cupon['Fecha_Fin'], 0, 10) < $hoy)
+            return "Vencido";
+        if (substr($cupon['Fecha_Inicio'], 0, 10) > $hoy)
+            return "Programado";
+        if ($cupon['Usos_Maximos'] !== null && $usos >= (int) $cupon['Usos_Maximos'])
+            return "Agotado";
         return "Vigente";
     }
 
@@ -54,21 +58,27 @@ class cupon
         $consulta->execute([$idTienda, $codigo]);
         $cupon = $consulta->fetch();
         $hoy = date('Y-m-d');
-        if (!$cupon) throw new Exception("Ese cupón no existe en esta tienda.", 400);
-        if ($cupon['Estado'] !== 'Activo') throw new Exception("Este cupón ya no está disponible.", 400);
-        if (substr($cupon['Fecha_Inicio'], 0, 10) > $hoy) throw new Exception("Este cupón empieza el " . date('d/m/Y', strtotime($cupon['Fecha_Inicio'])) . ".", 400);
-        if (substr($cupon['Fecha_Fin'], 0, 10) < $hoy) throw new Exception("Este cupón ya venció.", 400);
+        if (!$cupon)
+            throw new Exception("Ese cupón no existe en esta tienda.", 400);
+        if ($cupon['Estado'] !== 'Activo')
+            throw new Exception("Este cupón ya no está disponible.", 400);
+        if (substr($cupon['Fecha_Inicio'], 0, 10) > $hoy)
+            throw new Exception("Este cupón empieza el " . date('d/m/Y', strtotime($cupon['Fecha_Inicio'])) . ".", 400);
+        if (substr($cupon['Fecha_Fin'], 0, 10) < $hoy)
+            throw new Exception("Este cupón ya venció.", 400);
 
         $consulta = $this->conexion->prepare("SELECT COUNT(*) FROM CuponesUso WHERE Id_Cupon = ? AND Id_Usuario = ?");
         $consulta->execute([$cupon['Id_cupones'], $idUsuario]);
-        if ($consulta->fetchColumn() > 0) throw new Exception("Ya usaste este cupón.", 400);
+        if ($consulta->fetchColumn() > 0)
+            throw new Exception("Ya usaste este cupón.", 400);
 
         if ($cupon['Usos_Maximos'] !== null) {
             $consulta = $this->conexion->prepare("SELECT COUNT(*) FROM CuponesUso WHERE Id_Cupon = ?");
             $consulta->execute([$cupon['Id_cupones']]);
-            if ($consulta->fetchColumn() >= (int)$cupon['Usos_Maximos']) throw new Exception("Este cupón alcanzó su límite de usos.", 400);
+            if ($consulta->fetchColumn() >= (int) $cupon['Usos_Maximos'])
+                throw new Exception("Este cupón alcanzó su límite de usos.", 400);
         }
-        if ($cupon['Compra_Minima'] !== null && $subtotalTienda < (float)$cupon['Compra_Minima']) {
+        if ($cupon['Compra_Minima'] !== null && $subtotalTienda < (float) $cupon['Compra_Minima']) {
             throw new Exception("Este cupón requiere una compra mínima de " . pesos($cupon['Compra_Minima']) . " en esta tienda.", 400);
         }
         return [$cupon, self::calcularDescuento($cupon, $subtotalTienda)];
@@ -83,7 +93,7 @@ class cupon
         $consulta->execute([$idTienda]);
         $cupones = $consulta->fetchAll();
         foreach ($cupones as &$c) {
-            $c['EstadoVisible'] = self::estadoVisible($c, (int)$c['Usos']);
+            $c['EstadoVisible'] = self::estadoVisible($c, (int) $c['Usos']);
             $c['Descripcion'] = self::describir($c);
         }
         return $cupones;
@@ -111,21 +121,26 @@ class cupon
             throw new Exception("Elige un tipo de descuento válido.", 400);
         }
         $valor = decimalONulo($datos, 'valor');
-        if ($valor === null || $valor <= 0) throw new Exception("El valor del descuento debe ser mayor que cero.", 400);
-        if ($tipo === 'Porcentaje' && $valor > 100) throw new Exception("Un porcentaje no puede pasar de 100.", 400);
+        if ($valor === null || $valor <= 0)
+            throw new Exception("El valor del descuento debe ser mayor que cero.", 400);
+        if ($tipo === 'Porcentaje' && $valor > 100)
+            throw new Exception("Un porcentaje no puede pasar de 100.", 400);
         $inicio = fechaONula($datos, 'inicio');
         $fin = fechaONula($datos, 'fin');
-        if (!$inicio || !$fin) throw new Exception("Indica las fechas de inicio y fin.", 400);
-        if ($fin < $inicio) throw new Exception("La fecha final no puede ser anterior a la inicial.", 400);
+        if (!$inicio || !$fin)
+            throw new Exception("Indica las fechas de inicio y fin.", 400);
+        if ($fin < $inicio)
+            throw new Exception("La fecha final no puede ser anterior a la inicial.", 400);
         $minima = decimalONulo($datos, 'compraMinima');
-        $usos = isset($datos['usosMaximos']) && $datos['usosMaximos'] !== '' ? max(1, (int)$datos['usosMaximos']) : null;
+        $usos = isset($datos['usosMaximos']) && $datos['usosMaximos'] !== '' ? max(1, (int) $datos['usosMaximos']) : null;
 
         $sql = "INSERT INTO Cupones (Id_Tienda, Codigo, Tipo_Descuento, Valor, Compra_Minima, Usos_Maximos, Fecha_Inicio, Fecha_Fin, Estado, Fecha_Creacion)
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'Activo', ?)";
         try {
             $this->conexion->prepare($sql)->execute([$idTienda, $codigo, $tipo, $valor, $minima > 0 ? $minima : null, $usos, $inicio, $fin, ahora()]);
         } catch (PDOException $e) {
-            if ($e->getCode() == 23000) throw new Exception("Ya tienes un cupón con ese código.", 409);
+            if ($e->getCode() == 23000)
+                throw new Exception("Ya tienes un cupón con ese código.", 409);
             throw $e;
         }
         return $codigo;
@@ -136,7 +151,8 @@ class cupon
         $consulta = $this->conexion->prepare("SELECT * FROM Cupones WHERE Id_cupones = ? AND Id_Tienda = ?");
         $consulta->execute([$idCupon, $idTienda]);
         $cupon = $consulta->fetch();
-        if (!$cupon) throw new Exception("El cupón no existe.", 404);
+        if (!$cupon)
+            throw new Exception("El cupón no existe.", 404);
         return $cupon;
     }
 

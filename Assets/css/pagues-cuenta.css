@@ -1,0 +1,20 @@
+/* =====================================================================
+   MULTISHOP · Compra y cuenta: carrito, pago, pedidos, PQRS, chat, ingreso, perfil y textos legales.
+   Solo usa tokens de tokens.css. La identidad de cada tienda entra por las variables --t-* (ver TemaTienda.ComoEstiloEnLinea).
+   ===================================================================== */
+
+/* ---------- Identidad local de una tienda (sin cambiar el tema de la página) ---------- */
+.ms-tienda {
+  --c-accent: var(--t-accent, var(--accent)); --c-contrast: var(--t-accent-contrast, var(--accent-contrast));
+  --c-hover: var(--t-accent-hover, var(--accent-hover)); --c-soft: var(--t-accent-soft, var(--accent-soft));
+  --c-soft-text: var(--t-accent-soft-text, var(--accent-soft-text)); --c-link: var(--t-accent-link, var(--accent-link));
+}
+:root[data-theme="dark"] .ms-tienda {
+  --c-accent: var(--t-accent-dark, var(--accent)); --c-contrast: var(--t-accent-contrast-dark, var(--accent-contrast));
+  --c-hover: var(--t-accent-hover-dark, var(--accent-hover)); --c-soft: var(--t-accent-soft-dark, var(--accent-soft));
+  --c-soft-text: var(--t-accent-soft-text-dark, var(--accent-soft-text)); --c-link: var(--t-accent-link-dark, var(--accent-link));
+}
+.ms-tienda .btn-ms-primary { --btn-bg: var(--c-accent); --btn-bd: var(--c-accent); --btn-fg: var(--c-contrast); --btn-bg-h: var(--c-hover); --btn-fg-h: var(--c-contrast); }
+.ms-tienda .btn-outline-ms { --btn-fg: var(--c-link); --btn-bd: var(--c-link); --btn-bg-h: var(--c-soft); --btn-fg-h: var(--c-soft-text); }
+.ms-tienda .ms-linea-tiempo li.hecho + li.hecho::before, .ms-tienda .ms-linea-tiempo li.hecho + li.actual::before { background: var(--c-accent); }
+.ms-tienda .ms-linea-tiempo li.hecho .punto { background: var(--c-accent); border-color: var(--c-accent); color: var(--c-contrast); }
